@@ -1,59 +1,69 @@
-# LearningWeek
+# Learning Week Air France
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.7.
+Application de gestion des événements pour la Learning Week d'Air France, développée avec Angular et TailwindCSS.
 
-## Development server
+## Fonctionnalités
 
-To start a local development server, run:
+- Affichage des événements par jour/semaine
+- Filtrage par type d'activité, département et lieu
+- Inscription/désinscription aux événements
+- Affichage des événements auxquels l'utilisateur est inscrit
+- Recommandations personnalisées
+- Interface responsive aux couleurs d'Air France
+
+## Structure du projet
+
+- **Composants**:
+  - `NavbarComponent`: Barre de navigation
+  - `HeaderComponent`: En-tête de l'application
+  - `CalendarComponent`: Vue principale des événements
+  - `EventCardComponent`: Affichage d'un événement individuel
+  - `MyBookingsComponent`: Liste des réservations de l'utilisateur
+  - `RecommendedComponent`: Événements recommandés
+  - `FooterComponent`: Pied de page avec informations
+
+- **Services**:
+  - `EventService`: Gestion des événements et réservations
+
+- **Modèles**:
+  - `Event`: Structure des données d'un événement
+  - Énumérations pour les types d'événements et départements
+
+## Technologies utilisées
+
+- Angular 17
+- TailwindCSS
+- Angular Material
+- TypeScript
+
+## Installation
 
 ```bash
+# Cloner le dépôt
+git clone https://github.com/KarimCharleux/LearningWeek.git
+
+# Accéder au répertoire
+cd LearningWeek
+
+# Installer les dépendances
+npm install
+
+# Lancer l'application en mode développement
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Captures d'écran
 
-## Code scaffolding
+![Aperçu de l'application](src/assets/screenshot.png)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Développement futur
 
-```bash
-ng generate component component-name
-```
+- Authentification des utilisateurs
+- Notifications pour les rappels d'événements
+- Système de notation des événements passés
+- Intégration avec des calendriers externes (Google Calendar, Outlook)
+- Fonctionnalités sociales pour partager des événements
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Licence
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Développé pour Air France - Tous droits réservés
