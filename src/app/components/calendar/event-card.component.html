@@ -1,0 +1,95 @@
+<div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+  <div class="flex">
+    <!-- Left side: Date display -->
+    <div class="w-24 md:w-32 flex flex-col items-center justify-center p-4 bg-gray-100">
+      <div class="text-center">
+        <div class="text-sm font-medium text-gray-500">
+          {{ event.startTime | date:'EEE' }}
+        </div>
+        <div class="text-3xl font-bold text-[#0f2b5b]">
+          {{ event.startTime | date:'dd' }}
+        </div>
+        <div *ngIf="showMonth" class="text-sm font-medium text-gray-500">
+          {{ event.startTime | date:'MMM' }}
+        </div>
+      </div>
+    </div>
+    
+    <!-- Right side: Event details -->
+    <div class="flex-1 p-4">
+      <div class="flex items-start justify-between">
+        <div>
+          <div class="flex items-center space-x-2">
+            <mat-icon class="text-gray-500 text-sm" [ngClass]="{'text-[#ef3340]': event.isOnline}">
+              {{ event.isOnline ? 'videocam' : 'location_on' }}
+            </mat-icon>
+            <span class="text-sm text-gray-600">{{ event.location }}</span>
+          </div>
+          
+          <h3 class="text-lg font-semibold mt-2 text-[#0f2b5b]">{{ event.title }}</h3>
+          
+          <div class="flex items-center mt-2 text-sm text-gray-500">
+            <mat-icon class="text-gray-400 text-sm mr-1">schedule</mat-icon>
+            <span>{{ event.startTime | date:'HH:mm' }} - {{ event.endTime | date:'HH:mm' }}</span>
+          </div>
+        </div>
+        
+        <mat-chip class="h-6 !min-h-0" [ngClass]="{
+          'bg-blue-100': event.type === 'Présentation',
+          'bg-green-100': event.type === 'Atelier',
+          'bg-purple-100': event.type === 'Conférence',
+          'bg-yellow-100': event.type === 'Rencontre',
+          'bg-orange-100': event.type === 'Formation',
+          'bg-red-100': event.type === 'Visite'
+        }">
+          {{ event.type }}
+        </mat-chip>
+      </div>
+      
+      <p *ngIf="showDescription" class="mt-2 text-sm text-gray-600 line-clamp-2">
+        {{ event.description }}
+      </p>
+      
+      <div class="flex justify-between items-center mt-4">
+        <div class="text-sm text-gray-500">
+          <span [ngClass]="{'text-green-600': event.availableSeats > 5, 'text-yellow-600': event.availableSeats <= 5 && event.availableSeats > 0, 'text-red-600': event.availableSeats === 0}">
+            {{ event.availableSeats }} places disponibles
+          </span> 
+          sur {{ event.totalSeats }}
+        </div>
+        
+        <div>
+          <button 
+            mat-raised-button 
+            *ngIf="!isBooked" 
+            [disabled]="event.availableSeats === 0"
+            [color]="event.availableSeats > 0 ? 'primary' : ''"
+            class="px-4 py-1 text-sm"
+            (click)="onBook.emit(event.id)"
+          >
+            S'inscrire
+          </button>
+          
+          <button 
+            mat-stroked-button 
+            *ngIf="isBooked" 
+            color="warn"
+            class="px-4 py-1 text-sm"
+            (click)="onCancel.emit(event.id)"
+          >
+            Annuler
+          </button>
+          
+          <button 
+            mat-icon-button 
+            matTooltip="Plus d'informations"
+            class="ml-2"
+            (click)="onDetails.emit(event)"
+          >
+            <mat-icon>info</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

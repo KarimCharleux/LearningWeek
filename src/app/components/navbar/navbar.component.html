@@ -1,0 +1,33 @@
+<mat-toolbar class="bg-[#0f2b5b] text-white shadow-md">
+  <div class="container mx-auto flex justify-between items-center">
+    <div class="flex items-center">
+      <img src="assets/airfrance-logo.svg" alt="Air France Logo" class="h-8 mr-4" />
+      <span class="text-xl font-medium hidden md:inline">Air France Learning Week</span>
+      <span class="text-xl font-medium md:hidden">AF Learning Week</span>
+    </div>
+    
+    <div class="hidden md:flex items-center space-x-4">
+      <button mat-button class="text-white">Accueil</button>
+      <button mat-button class="text-white">Calendrier</button>
+      <button mat-button class="text-white">Mes inscriptions</button>
+      <button mat-button class="text-white">À propos</button>
+    </div>
+    
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="md:hidden">
+      <mat-icon class="text-white">menu</mat-icon>
+    </button>
+    
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Accueil</button>
+      <button mat-menu-item>Calendrier</button>
+      <button mat-menu-item>Mes inscriptions</button>
+      <button mat-menu-item>À propos</button>
+    </mat-menu>
+    
+    <div class="hidden md:block">
+      <button mat-icon-button class="text-white">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    </div>
+  </div>
+</mat-toolbar> 

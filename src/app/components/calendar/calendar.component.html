@@ -1,0 +1,102 @@
+<section class="py-12 px-4 md:px-8 bg-gray-50">
+  <div class="container mx-auto">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+      <div>
+        <h2 class="text-3xl font-bold text-[#0f2b5b] mb-2">Vue calendrier</h2>
+        <p class="text-gray-600">Découvrez et inscrivez-vous aux activités de la Learning Week</p>
+      </div>
+      
+      <div class="mt-4 md:mt-0">
+        <mat-button-toggle-group value="upcoming">
+          <mat-button-toggle value="upcoming">À venir</mat-button-toggle>
+          <mat-button-toggle value="all">Tous</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
+    
+    <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+      <form [formGroup]="filterForm" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Type d'activité</mat-label>
+          <mat-select formControlName="eventType">
+            <mat-option [value]="">Tous</mat-option>
+            <mat-option *ngFor="let type of eventTypes" [value]="type">{{ type }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Département</mat-label>
+          <mat-select formControlName="department">
+            <mat-option [value]="">Tous</mat-option>
+            <mat-option *ngFor="let dept of departments" [value]="dept">{{ dept }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline">
+          <mat-label>Lieu</mat-label>
+          <mat-select formControlName="location">
+            <mat-option [value]="">Tous</mat-option>
+            <mat-option value="Online">En ligne</mat-option>
+            <mat-option value="Présentiel">Présentiel</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </div>
+    
+    <mat-tab-group class="mb-8" animationDuration="300ms">
+      <mat-tab label="Tous les jours">
+        <div class="pt-6 space-y-6">
+          <div *ngFor="let day of groupedEvents | keyvalue">
+            <h3 class="text-xl font-semibold text-[#0f2b5b] mb-4">{{ day.key }}</h3>
+            <div class="space-y-4">
+              <app-event-card 
+                *ngFor="let event of day.value" 
+                [event]="event"
+                [isBooked]="isEventBooked(event.id)"
+                (onBook)="bookEvent($event)"
+                (onCancel)="cancelBooking($event)"
+                (onDetails)="showEventDetails($event)"
+              ></app-event-card>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="8 avril">
+        <div class="pt-6 space-y-4">
+          <app-event-card 
+            *ngFor="let event of getEventsForDate('2025-04-08')" 
+            [event]="event"
+            [isBooked]="isEventBooked(event.id)"
+            (onBook)="bookEvent($event)"
+            (onCancel)="cancelBooking($event)"
+            (onDetails)="showEventDetails($event)"
+          ></app-event-card>
+        </div>
+      </mat-tab>
+      <mat-tab label="9 avril">
+        <div class="pt-6 space-y-4">
+          <app-event-card 
+            *ngFor="let event of getEventsForDate('2025-04-09')" 
+            [event]="event"
+            [isBooked]="isEventBooked(event.id)"
+            (onBook)="bookEvent($event)"
+            (onCancel)="cancelBooking($event)"
+            (onDetails)="showEventDetails($event)"
+          ></app-event-card>
+        </div>
+      </mat-tab>
+      <mat-tab label="10 avril">
+        <div class="pt-6 space-y-4">
+          <app-event-card 
+            *ngFor="let event of getEventsForDate('2025-04-10')" 
+            [event]="event"
+            [isBooked]="isEventBooked(event.id)"
+            (onBook)="bookEvent($event)"
+            (onCancel)="cancelBooking($event)"
+            (onDetails)="showEventDetails($event)"
+          ></app-event-card>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</section>
